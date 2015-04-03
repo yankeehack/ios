@@ -23,17 +23,17 @@ class ViewController: UIViewController {
         }
     }
     
-    var opperandStack = Array<Double>()
+    var operandStack = Array<Double>()
+    var lastOp: String = ""
     
-    @IBAction func enter() {
+    func store (){
         if typingInt {
             typingInt = false
-            opperandStack.append(displayValue)
+            operandStack.append(displayValue)
         }
     }
     
-    
-    var displayValue: Double{
+    var displayValue: Double {
         get{
            return NSNumberFormatter().numberFromString(display.text!)!.doubleValue
         }
@@ -45,20 +45,34 @@ class ViewController: UIViewController {
     
     @IBAction func operate(sender: UIButton) {
         let operand = sender.currentTitle!
-        if typingInt {enter()}
-        switch operand {
-        case "×": performFunction{(op1, op2) in op2 * op1}
-        case "÷": performFunction{(op1, op2) in op2 / op1}
-        case "+": performFunction{(op1, op2) in op2 + op1}
-        case "−": performFunction{(op1, op2) in op2 - op1}
+        if typingInt {
+            calculate(lastOp)
+            store()
+        }
+        lastOp = operand
+    }
+    
+    func calculate(operation: String) {
+        switch operation {
+            case "×": performFunction{(op1, op2) in op2 * op1}
+            case "÷": performFunction{(op1, op2) in op2 / op1}
+            case "+": performFunction{(op1, op2) in op2 + op1}
+            case "−": performFunction{(op1, op2) in op2 - op1}
+            case "√": performFunction{(op1) in sqrt(op1)}
         default: break
         }
     }
     
     func performFunction(operation: (Double, Double) -> Double){
-        if opperandStack.count >= 2{
-            displayValue = operation(opperandStack.removeLast(), opperandStack.removeLast())
-            enter()
+        if operandStack.count == 1 {
+            operandStack.append(operation(operandStack.removeLast(), displayValue))
+            displayValue = operandStack.last!
+        }
+    }
+    func performFunction(operation: (Double) -> Double){
+        if operandStack.count == 0 {
+            operandStack.append(operation(displayValue))
+            displayValue = operandStack.last!
         }
     }
     
