@@ -5,13 +5,13 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>BEC91693-03E5-4DA3-B0A3-B8F89970C5CB</string>
+	<string>47AA197F-6BDE-42A1-8C9F-ADBB71ED553D</string>
 	<key>IDESourceControlProjectName</key>
 	<string>calculator</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>2E94F1BDFD533E9751C9AAD568A69388697654DC</key>
-		<string>https://github.com/yankeehack/ios.git</string>
+		<string>github.com:yankeehack/ios.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>calculator.xcodeproj</string>
@@ -21,7 +21,7 @@
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/yankeehack/ios.git</string>
+	<string>github.com:yankeehack/ios.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
@@ -34,7 +34,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>2E94F1BDFD533E9751C9AAD568A69388697654DC</string>
 			<key>IDESourceControlWCCName</key>
-			<string>ios</string>
+			<string>calculator</string>
 		</dict>
 	</array>
 </dict>

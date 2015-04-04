@@ -9,13 +9,28 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        var leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
+        leftSwipe.direction = .Left
+        
+        view.addGestureRecognizer(leftSwipe)
+        
+    }
+    
+    func handleSwipes(sender: UISwipeGestureRecognizer){
+        if(typingInt){
+            display.text = display.text!.substringToIndex(display.text!.endIndex.predecessor())
+        }
+    }
+    
     @IBOutlet weak var display: UILabel!
     var typingInt = false
     
     @IBAction func appendDigit(sender: UIButton) {
         let digit = sender.currentTitle!
         println("digit = \(digit)")
+        logHistory(digit)
         if typingInt {display.text = display.text!+digit}
         else {
             display.text = digit
@@ -42,9 +57,16 @@ class ViewController: UIViewController {
             typingInt = false
         }
     }
+    @IBOutlet weak var history: UITextView!
+    
+    func logHistory(s: String){
+        history.text = history.text + s + "\n"
+    }
+    
     
     @IBAction func operate(sender: UIButton) {
         let operand = sender.currentTitle!
+        logHistory(operand)
         if typingInt {
             calculate(lastOp)
             store()
@@ -52,12 +74,19 @@ class ViewController: UIViewController {
         lastOp = operand
     }
     
+    @IBAction func clear() {
+        operandStack.removeAll(keepCapacity: false)
+        history.text = ""
+        typingInt = false
+        displayValue = 0
+    }
+    
     func calculate(operation: String) {
         switch operation {
-            case "×": performFunction{(op1, op2) in op2 * op1}
-            case "÷": performFunction{(op1, op2) in op2 / op1}
-            case "+": performFunction{(op1, op2) in op2 + op1}
-            case "−": performFunction{(op1, op2) in op2 - op1}
+            case "×": performFunction{(op1, op2) in op1 * op2}
+            case "÷": performFunction{(op1, op2) in op1 / op2}
+            case "+": performFunction{(op1, op2) in op1 + op2}
+            case "−": performFunction{(op1, op2) in op1 - op2}
             case "√": performFunction{(op1) in sqrt(op1)}
         default: break
         }
@@ -75,6 +104,7 @@ class ViewController: UIViewController {
             displayValue = operandStack.last!
         }
     }
+    
     
     
     
