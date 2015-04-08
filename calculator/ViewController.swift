@@ -19,8 +19,11 @@ class ViewController: UIViewController {
     }
     
     func handleSwipes(sender: UISwipeGestureRecognizer){
-        if(typingInt){
+        if countElements(display.text!) > 1 {
             display.text = display.text!.substringToIndex(display.text!.endIndex.predecessor())
+        }
+        else {
+            displayValue = 0
         }
     }
     
