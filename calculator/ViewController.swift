@@ -29,6 +29,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var display: UILabel!
     var typingInt = false
+    var brain = CalculatorBrain()
     
     @IBAction func appendDigit(sender: UIButton) {
         let digit = sender.currentTitle!
@@ -84,29 +85,6 @@ class ViewController: UIViewController {
         displayValue = 0
     }
     
-    func calculate(operation: String) {
-        switch operation {
-            case "×": performFunction{(op1, op2) in op1 * op2}
-            case "÷": performFunction{(op1, op2) in op1 / op2}
-            case "+": performFunction{(op1, op2) in op1 + op2}
-            case "−": performFunction{(op1, op2) in op1 - op2}
-            case "√": performFunction{(op1) in sqrt(op1)}
-        default: break
-        }
-    }
-    
-    func performFunction(operation: (Double, Double) -> Double){
-        if operandStack.count == 1 {
-            operandStack.append(operation(operandStack.removeLast(), displayValue))
-            displayValue = operandStack.last!
-        }
-    }
-    func performFunction(operation: (Double) -> Double){
-        if operandStack.count == 0 {
-            operandStack.append(operation(displayValue))
-            displayValue = operandStack.last!
-        }
-    }
     
     
     
